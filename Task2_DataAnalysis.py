@@ -19,15 +19,15 @@ def explore_feature(dataframe, feature):
     feature_relevant.describe()
     feature_non_relevant.describe()
     u, p_value = mannwhitneyu(feature_non_relevant, feature_relevant)
-    plot_feature(feature_relevant, feature_non_relevant, "", "", "box")
+    plot_feature(feature_relevant, feature_non_relevant, "", "", "hist")
 
 
 if __name__ == "__main__":
     df = pd.read_csv("task2_data.csv")
-    explore_feature(df, 'entities')
-    explore_feature(df, '#entityTypes')
-    explore_feature(df, '#tweetsPosted')
-    explore_feature(df, 'sentiment')
+    explore_feature(df, '#entities')
+    # explore_feature(df, '#entityTypes')
+    # explore_feature(df, '#tweetsPosted')
+    # explore_feature(df, 'sentiment')
     # explore_feature(df, )
 
 
