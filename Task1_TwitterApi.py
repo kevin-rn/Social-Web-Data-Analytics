@@ -5,15 +5,15 @@ import tweepy
 import json
 
 # The consumer key and secret
-# consumer_key = '9UUCquiHXYJ1SvMObpofwmiNF'
-# consumer_secret = 'OxIp7w8nZzatInY4wMfrD6f9sBmjh0Okv2vpLscq7uBpW3T7dA'
+# consumer_key = 'CONSUMER_KEY'
+# consumer_secret = 'CONSUMER_SECRET'
 
 # Access token
-# access_token = '1586041576639406082-Zi3aUX7xKdtXlXx39hGoRg7Fk63GH6'
-# access_token_secret = 'glTf2dDyIxi9M3LGVM4YlMx9RdgMgNrPHxH8ev0PEXovp'
+# access_token = 'ACCESS_TOKEN'
+# access_token_secret = 'ACCESS_TOKEN_SECRET'
 
 # Bearer Token
-bearer_token = 'AAAAAAAAAAAAAAAAAAAAADoujwEAAAAAQACIrHPG%2FZ5bmR59TdWpM%2FSpgxw%3DekI4c5DxvP6GMGhvZXPCXrWRXEcFxHKL3eyqOdSDUwPQGOZbOY'
+bearer_token = 'BEARER_TOKEN'
 
 
 class StdOutListener(tweepy.StreamingClient):
@@ -57,19 +57,19 @@ class StdOutListener(tweepy.StreamingClient):
 
 if __name__ == '__main__':
     # Task 1.2 - 10 min
-    # time_duration = 600
+    time_duration = 600
 
     # Task 1.3 - 2 hours
-    time_duration = 7200
+    # time_duration = 7200
 
     listener = StdOutListener(timer_limit=time_duration)
 
     try:
         # Task 1.2
-        # listener.sample()
+        listener.sample()
 
         # Task 1.3 - Crawl tweets sent from Amsterdam geo coordinates.
-        rule = tweepy.StreamRule("bounding_box:[4.61 52.27 5.07 52.5]")
+        # rule = tweepy.StreamRule("bounding_box:[4.61 52.27 5.07 52.5]")
 
         # Task 1.3 - Crawl tweets related to COVID-19 using related terms.
         # rule = tweepy.StreamRule("covid OR covid-19 OR corona OR coronavirus OR lockdown")
