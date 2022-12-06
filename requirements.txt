@@ -1,5 +1,0 @@
-tweepy==4.12.1
-numpy
-scipy
-pandas
-matplotlib

@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from matplotlib import pyplot as plt
-from scipy.stats import f_oneway, mannwhitneyu, ttest_ind, wilcoxon
+from scipy.stats import mannwhitneyu, ttest_ind
 
 
 def plot_feature(feature, feature_relevant, feature_non_relevant, plot_type):
@@ -16,7 +16,7 @@ def plot_feature(feature, feature_relevant, feature_non_relevant, plot_type):
     plt.show()
 
 
-def explore_feature(dataframe, feature, type_plot):
+def explore_feature(dataframe, feature, type_plot, is_nd):
     """
     Separates relevant and non-relevant tweets for certain feature and calculates the p-values.
     """
@@ -26,21 +26,20 @@ def explore_feature(dataframe, feature, type_plot):
     print(f"\n{feature}: \nFeature relevant: \n{feature_relevant.describe()} \n\n"
           f"Feature non-relevant \n{feature_non_relevant.describe()}")
 
-    _, mwu_p_value = mannwhitneyu(feature_non_relevant, feature_relevant)
-    _, anova_p_value = f_oneway(feature_non_relevant, feature_relevant)
-    _, tt_p_value = ttest_ind(feature_non_relevant, feature_relevant)
-
-    print(f"\nP-values:\nMann Whitney U test: {mwu_p_value}"
-          f"\nOne way Anova test: {anova_p_value}"
-          f"\nT-test: {tt_p_value}")
+    if is_nd:
+        _, tt_p_value = ttest_ind(feature_non_relevant, feature_relevant)
+        print(f"\nT-test - p-value: {tt_p_value}")
+    else:
+        _, mwu_p_value = mannwhitneyu(feature_non_relevant, feature_relevant)
+        print(f"\nMann Whitney U test - p-value: {mwu_p_value}")
 
     plot_feature(feature, feature_relevant, feature_non_relevant, type_plot)
 
 
 if __name__ == "__main__":
     df = pd.read_csv("task2_data.csv")
-    explore_feature(df, '#entities', 'hist')
-    explore_feature(df, '#entityTypes', 'box')
-    explore_feature(df, '#tweetsPosted', 'hist')
-    explore_feature(df, 'sentiment', 'hist')
-    explore_feature(df, 'nFavorties', 'box')
+    explore_feature(df, '#entities', 'hist', False)
+    explore_feature(df, '#entityTypes', 'hist', False)
+    explore_feature(df, '#tweetsPosted', 'hist', False)
+    explore_feature(df, 'sentiment', 'box', True)
+    explore_feature(df, 'nFavorties', 'box', False)
